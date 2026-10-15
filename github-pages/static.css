@@ -19,9 +19,9 @@ h1,h2 { letter-spacing:-.055em; line-height:.98; }
 .card h2 { font:500 1.65rem/1.04 'Newsreader',Georgia,serif; margin:10px 0; }
 .summary { color:var(--muted); line-height:1.5; min-height:3em; }
 .meta { color:var(--muted); font-size:.78rem; margin-top:18px; }
-.article-wrap { background:#fffefa; margin:42px 0 90px; padding:56px 0 96px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
-.back { color:var(--muted); text-decoration:none; }
-.article { width:50vw; max-width:1180px; margin:62px auto 0; }
+.article-wrap { background:#fffefa; margin:28px 0 90px; padding:34px 0 96px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.back { display:block; width:50vw; max-width:1180px; margin:0 auto; color:var(--muted); text-decoration:none; }
+.article { width:50vw; max-width:1180px; margin:44px auto 0; }
 .article h1 { font:500 clamp(3rem,4.8vw,6.8rem)/.98 'Newsreader',Georgia,serif; letter-spacing:-.065em; margin:18px 0 32px; }
 .byline { color:var(--muted); margin-bottom:42px; }
 .hero { width:100%; max-height:620px; object-fit:cover; margin-bottom:48px; }
@@ -33,4 +33,4 @@ h1,h2 { letter-spacing:-.055em; line-height:.98; }
 .body code { background:#e9ece6; padding:.12em .3em; font-size:.88em; }
 .body pre code { background:transparent; padding:0; }
 .empty { color:var(--muted); border-top:1px solid var(--line); padding:24px 0 80px; }
-@media (max-width:760px) { .site { width:100%; padding:0 22px; } .grid { grid-template-columns:1fr; } .masthead { min-height:72px; } .intro { padding:60px 0; } .article-wrap { margin-top:26px; padding:34px 0 60px; } .article { width:100%; margin-top:42px; } .article h1 { font-size:clamp(3rem,13vw,5rem); } .dek { max-width:100%; } }
+@media (max-width:760px) { .site { width:100%; padding:0 22px; } .grid { grid-template-columns:1fr; } .masthead { min-height:72px; } .intro { padding:60px 0; } .article-wrap { margin-top:26px; padding:28px 0 60px; } .back,.article { width:100%; } .article { margin-top:38px; } .article h1 { font-size:clamp(3rem,13vw,5rem); } .dek { max-width:100%; } }
