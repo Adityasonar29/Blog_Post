@@ -77,6 +77,15 @@ def esc(value) -> str:
     return html.escape(str(value or ""), quote=True)
 
 
+def public_url(path: str) -> str:
+    """Turn an exported relative asset/page path into a shareable absolute URL."""
+    raw = str(path or "").strip()
+    if raw.startswith("http://") or raw.startswith("https://"):
+        return raw
+    base = os.getenv("PUBLIC_SITE_URL", "https://adityasonar29.github.io/Blog_Post").rstrip("/")
+    return f"{base}/{raw.lstrip('./')}"
+
+
 def post_slug(post: dict, used: set[str]) -> str:
     base = safe_slug(post.get("slug") or post.get("title"))
     candidate = base
@@ -128,10 +137,16 @@ h1,h2 { letter-spacing:-.055em; line-height:.98; }
 """
 
 
-def page(title: str, body: str, stylesheet_href: str = "static.css") -> str:
+def page(title: str, body: str, stylesheet_href: str = "static.css", metadata: dict | None = None) -> str:
+    metadata = metadata or {}
+    description = esc(metadata.get("description") or "Stories worth keeping from Fieldnotes.")
+    image = esc(metadata.get("image") or "")
+    canonical = esc(metadata.get("url") or "")
+    keywords = esc(metadata.get("keywords") or "")
+    social = f"<meta name=\"description\" content=\"{description}\"><meta name=\"keywords\" content=\"{keywords}\"><meta property=\"og:type\" content=\"article\"><meta property=\"og:title\" content=\"{esc(title)} · Fieldnotes\"><meta property=\"og:description\" content=\"{description}\"><meta property=\"og:url\" content=\"{canonical}\"><meta property=\"og:site_name\" content=\"Fieldnotes\"><meta property=\"og:image\" content=\"{image}\"><meta name=\"twitter:card\" content=\"summary_large_image\"><meta name=\"twitter:title\" content=\"{esc(title)} · Fieldnotes\"><meta name=\"twitter:description\" content=\"{description}\"><meta name=\"twitter:image\" content=\"{image}\">"
     return f"""<!doctype html>
 <html lang=\"en\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">
-<title>{esc(title)} · Fieldnotes</title><link rel=\"preconnect\" href=\"https://fonts.googleapis.com\"><link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin><link href=\"https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"{stylesheet_href}\"><style>{stylesheet()}</style></head>
+{social}<link rel=\"canonical\" href=\"{canonical}\"><title>{esc(title)} · Fieldnotes</title><link rel=\"preconnect\" href=\"https://fonts.googleapis.com\"><link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin><link href=\"https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=DM+Sans:wght@400;500;600;700&display=swap\" rel=\"stylesheet\"><link rel=\"stylesheet\" href=\"{stylesheet_href}\"><style>{stylesheet()}</style></head>
 <body><div class=\"site\">{body}</div></body></html>"""
 
 
@@ -156,7 +171,18 @@ def build(posts: list[dict]) -> None:
 <article class=\"article\"><div class=\"kicker\">{esc(post.get('category') or 'Journal')} · {esc(post.get('read_time') or '5 min read')}</div>
 <h1>{esc(post.get('title') or 'Untitled story')}</h1><p class=\"byline\">By <strong>{esc(post.get('author') or 'Anonymous')}</strong> · {esc(date)}</p>{hero}
 <p class=\"dek\">{esc(post.get('overview') or '')}</p><div class=\"body\">{body_html}</div></article></main>"""
-        (OUTPUT / "posts" / f"{slug}.html").write_text(page(f"{post.get('title') or 'Story'}", article, "../static.css"), encoding="utf-8")
+        title = post.get("seo_title") or post.get("title") or "Story"
+        description = post.get("meta_description") or post.get("overview") or "Stories worth keeping from Fieldnotes."
+        keywords = post.get("keywords") or ""
+        if isinstance(keywords, list):
+            keywords = ", ".join(str(item) for item in keywords)
+        metadata = {
+            "description": description,
+            "keywords": keywords,
+            "image": public_url(cover) if cover else "",
+            "url": public_url(f"posts/{slug}.html"),
+        }
+        (OUTPUT / "posts" / f"{slug}.html").write_text(page(title, article, "../static.css", metadata), encoding="utf-8")
 
     cards = []
     for post, cover, date in rendered:
@@ -167,7 +193,10 @@ def build(posts: list[dict]) -> None:
     grid = "\n".join(cards) if cards else '<p class="empty">No published stories yet. Export again after publishing a post.</p>'
     home = f"""<header class=\"masthead\"><a class=\"brand\" href=\"index.html\"><span class=\"brand-mark\">✳</span>fieldnotes</a><span class=\"kicker\">Published journal</span></header>
 <main><section class=\"intro\"><div class=\"kicker\">A static edition</div><h1>Stories worth keeping.</h1><p>Published from the Fieldnotes studio and ready to share on the open web.</p></section><section class=\"grid\">{grid}</section></main>"""
-    (OUTPUT / "index.html").write_text(page("Latest stories", home), encoding="utf-8")
+    (OUTPUT / "index.html").write_text(page("Latest stories", home, "static.css", {
+        "description": "Published stories from the Fieldnotes journal.",
+        "url": public_url("index.html"),
+    }), encoding="utf-8")
 
 
 def main() -> None:
