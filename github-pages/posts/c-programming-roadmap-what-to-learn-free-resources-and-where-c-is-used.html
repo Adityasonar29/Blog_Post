@@ -38,6 +38,8 @@ h1,h2 { letter-spacing:-.055em; line-height:.98; }
 .body a { color:#b94d35; text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:3px; }
 .body ul,.body ol { padding-left:1.5em; margin:0 0 1.35em; }
 .body li { padding-left:.25em; margin:.35em 0; }
+.body .task-item { list-style:none; margin-left:-1.5em; }
+.body .task-item input { accent-color:var(--accent); margin-right:.55em; }
 .body blockquote { border-left:3px solid var(--accent); margin:1.7em 0; padding:.25em 0 .25em 1.25em; color:var(--muted); font-style:italic; }
 .body img { display:block; max-width:100%; height:auto; margin:24px 0; }
 .body figure { margin:28px 0; }
@@ -154,10 +156,10 @@ Most beginners don&#x27;t stall on C programming because it is hard. They stall 
 <p>&#91;image: Four blocks across 30 days: set up and basics, arrays and pointers, practise and read code, build your first project]</p>
 <p>Map in hand, resources chosen, reason clear. Here is how it fits together. Thirty to sixty minutes a day is enough.</p>
 <ul>
-<li>[ ] <strong>Days 1-7: Set up and the basics.</strong> Install your compiler (Stop 1). Work through the first chapters of Learn-C.org, or week 1 of CS50x, which starts with C. Write your ten tiny programs (Stop 2).</li>
-<li>[ ] <strong>Days 8-14: Arrays, strings and pointers.</strong> Read the matching sections of Beej's Guide to C (Stop 3). Draw every pointer on paper before you code it.</li>
-<li>[ ] <strong>Days 15-22: Practise and read real code.</strong> Solve one Exercism C exercise every other day. Read small programs and predict their output (Stop 4). Paste one of your own into Compiler Explorer just to look.</li>
-<li>[ ] <strong>Days 23-30: Build.</strong> Start the contact book from our first guide, or begin the text editor tutorial. Keep a notes file of every crash and what caused it.</li>
+<li class="task-item"><input type="checkbox" disabled> <strong>Days 1-7: Set up and the basics.</strong> Install your compiler (Stop 1). Work through the first chapters of Learn-C.org, or week 1 of CS50x, which starts with C. Write your ten tiny programs (Stop 2).</li>
+<li class="task-item"><input type="checkbox" disabled> <strong>Days 8-14: Arrays, strings and pointers.</strong> Read the matching sections of Beej's Guide to C (Stop 3). Draw every pointer on paper before you code it.</li>
+<li class="task-item"><input type="checkbox" disabled> <strong>Days 15-22: Practise and read real code.</strong> Solve one Exercism C exercise every other day. Read small programs and predict their output (Stop 4). Paste one of your own into Compiler Explorer just to look.</li>
+<li class="task-item"><input type="checkbox" disabled> <strong>Days 23-30: Build.</strong> Start the contact book from our first guide, or begin the text editor tutorial. Keep a notes file of every crash and what caused it.</li>
 </ul>
 <p>That notes file becomes your most valuable resource. In a month, it will be a personal map of exactly where you get stuck.</p>
 <h2>C programming FAQ</h2>

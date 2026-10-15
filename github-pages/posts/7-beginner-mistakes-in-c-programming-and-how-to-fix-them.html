@@ -35,6 +35,8 @@ h1,h2 { letter-spacing:-.055em; line-height:.98; }
 .body a { color:#b94d35; text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:3px; }
 .body ul,.body ol { padding-left:1.5em; margin:0 0 1.35em; }
 .body li { padding-left:.25em; margin:.35em 0; }
+.body .task-item { list-style:none; margin-left:-1.5em; }
+.body .task-item input { accent-color:var(--accent); margin-right:.55em; }
 .body blockquote { border-left:3px solid var(--accent); margin:1.7em 0; padding:.25em 0 .25em 1.25em; color:var(--muted); font-style:italic; }
 .body img { display:block; max-width:100%; height:auto; margin:24px 0; }
 .body figure { margin:28px 0; }
@@ -272,15 +274,15 @@ int main(void) {
 <h2>A quick checklist before submitting a C program</h2>
 <p>Use this checklist before submitting coursework or publishing a beginner project:</p>
 <ul>
-<li>[ ] Are variables initialised before they are read?</li>
-<li>[ ] Are conditions using <code>==</code> when comparison is intended?</li>
-<li>[ ] Are input results checked and values validated?</li>
-<li>[ ] Are array indices within valid bounds?</li>
-<li>[ ] Are pointers initialised and used only when valid?</li>
-<li>[ ] Is dynamically allocated memory released appropriately?</li>
-<li>[ ] Have compiler warnings been reviewed?</li>
-<li>[ ] Have normal, boundary, and invalid inputs been tested?</li>
-<li>[ ] Can you explain the purpose of each function?</li>
+<li class="task-item"><input type="checkbox" disabled> Are variables initialised before they are read?</li>
+<li class="task-item"><input type="checkbox" disabled> Are conditions using <code>==</code> when comparison is intended?</li>
+<li class="task-item"><input type="checkbox" disabled> Are input results checked and values validated?</li>
+<li class="task-item"><input type="checkbox" disabled> Are array indices within valid bounds?</li>
+<li class="task-item"><input type="checkbox" disabled> Are pointers initialised and used only when valid?</li>
+<li class="task-item"><input type="checkbox" disabled> Is dynamically allocated memory released appropriately?</li>
+<li class="task-item"><input type="checkbox" disabled> Have compiler warnings been reviewed?</li>
+<li class="task-item"><input type="checkbox" disabled> Have normal, boundary, and invalid inputs been tested?</li>
+<li class="task-item"><input type="checkbox" disabled> Can you explain the purpose of each function?</li>
 </ul>
 <h2>Frequently asked questions</h2>
 <h3>Why does my C program compile but produce the wrong output?</h3>

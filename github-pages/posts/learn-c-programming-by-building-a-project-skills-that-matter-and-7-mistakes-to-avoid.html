@@ -38,6 +38,8 @@ h1,h2 { letter-spacing:-.055em; line-height:.98; }
 .body a { color:#b94d35; text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:3px; }
 .body ul,.body ol { padding-left:1.5em; margin:0 0 1.35em; }
 .body li { padding-left:.25em; margin:.35em 0; }
+.body .task-item { list-style:none; margin-left:-1.5em; }
+.body .task-item input { accent-color:var(--accent); margin-right:.55em; }
 .body blockquote { border-left:3px solid var(--accent); margin:1.7em 0; padding:.25em 0 .25em 1.25em; color:var(--muted); font-style:italic; }
 .body img { display:block; max-width:100%; height:auto; margin:24px 0; }
 .body figure { margin:28px 0; }
@@ -299,10 +301,10 @@ p = NULL;
 <p>Remember the crash from Chapter 1? Now you can read it. It was almost certainly a pointer or a loop that reached into a box that was never yours, and you know the seven places to look first.</p>
 <p>Here is a four-week plan to keep the story going:</p>
 <ul>
-<li>[ ] <strong>Week 1:</strong> install <code>gcc</code>, compile "Hello, World", practice variables, loops and functions. Fix every warning.</li>
-<li>[ ] <strong>Week 2:</strong> arrays, strings and <code>struct</code>. Build the contact book from Chapter 4.</li>
-<li>[ ] <strong>Week 3:</strong> pointers. Write your own swap function and a function that fills an array.</li>
-<li>[ ] <strong>Week 4:</strong> <code>malloc</code>, <code>free</code> and files. Add saving and a growing list to your contact book.</li>
+<li class="task-item"><input type="checkbox" disabled> <strong>Week 1:</strong> install <code>gcc</code>, compile "Hello, World", practice variables, loops and functions. Fix every warning.</li>
+<li class="task-item"><input type="checkbox" disabled> <strong>Week 2:</strong> arrays, strings and <code>struct</code>. Build the contact book from Chapter 4.</li>
+<li class="task-item"><input type="checkbox" disabled> <strong>Week 3:</strong> pointers. Write your own swap function and a function that fills an array.</li>
+<li class="task-item"><input type="checkbox" disabled> <strong>Week 4:</strong> <code>malloc</code>, <code>free</code> and files. Add saving and a growing list to your contact book.</li>
 </ul>
 <p>Pace yourself to your schedule. Pointers usually take longer than the other weeks, and that is normal.</p>
 <h2>C programming FAQ</h2>

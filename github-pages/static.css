@@ -33,6 +33,8 @@ h1,h2 { letter-spacing:-.055em; line-height:.98; }
 .body a { color:#b94d35; text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:3px; }
 .body ul,.body ol { padding-left:1.5em; margin:0 0 1.35em; }
 .body li { padding-left:.25em; margin:.35em 0; }
+.body .task-item { list-style:none; margin-left:-1.5em; }
+.body .task-item input { accent-color:var(--accent); margin-right:.55em; }
 .body blockquote { border-left:3px solid var(--accent); margin:1.7em 0; padding:.25em 0 .25em 1.25em; color:var(--muted); font-style:italic; }
 .body img { display:block; max-width:100%; height:auto; margin:24px 0; }
 .body figure { margin:28px 0; }

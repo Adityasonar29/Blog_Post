@@ -73,6 +73,12 @@ def rewrite_markdown_images(source: str) -> str:
     return re.sub(r"!\[([^\]]*)\]\(([^)\s]+)", replace, source or "")
 
 
+def expand_markdown_shortcuts(source: str) -> str:
+    """Add lightweight common Markdown syntax not provided by Python-Markdown core."""
+    source = re.sub(r"(?<!~)~~([^\n]+?)~~(?!~)", r"<del>\1</del>", source or "")
+    return source
+
+
 def esc(value) -> str:
     return html.escape(str(value or ""), quote=True)
 
@@ -133,6 +139,8 @@ h1,h2 { letter-spacing:-.055em; line-height:.98; }
 .body a { color:#b94d35; text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:3px; }
 .body ul,.body ol { padding-left:1.5em; margin:0 0 1.35em; }
 .body li { padding-left:.25em; margin:.35em 0; }
+.body .task-item { list-style:none; margin-left:-1.5em; }
+.body .task-item input { accent-color:var(--accent); margin-right:.55em; }
 .body blockquote { border-left:3px solid var(--accent); margin:1.7em 0; padding:.25em 0 .25em 1.25em; color:var(--muted); font-style:italic; }
 .body img { display:block; max-width:100%; height:auto; margin:24px 0; }
 .body figure { margin:28px 0; }
@@ -185,11 +193,16 @@ def build(posts: list[dict]) -> None:
         date = display_date(post.get("published_at") or post.get("created_at") or post.get("date"))
         rendered.append((post, cover, date))
 
-        content = rewrite_markdown_images(post.get("content") or post.get("body") or "")
+        content = expand_markdown_shortcuts(rewrite_markdown_images(post.get("content") or post.get("body") or ""))
         body_html = markdown.markdown(
             content,
             extensions=["extra", "fenced_code", "tables", "sane_lists", "nl2br"],
             output_format="html5",
+        )
+        body_html = re.sub(
+            r"<li>\[([ xX])\]\s*",
+            lambda match: f'<li class="task-item"><input type="checkbox" disabled{" checked" if match.group(1).lower() == "x" else ""}> ',
+            body_html,
         )
         hero = f'<img class="hero" src="{esc(static_image_url(post.get("cover_image") or post.get("image"), True))}" alt="{esc(post.get("title"))}">' if cover else ""
         article = f"""<main class=\"article-wrap\"><a class=\"back\" href=\"../index.html\">← Back to Fieldnotes</a>
