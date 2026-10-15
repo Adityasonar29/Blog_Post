@@ -1,0 +1,312 @@
+:root {
+  --brand-ink: #18201c;
+  --brand-orange: #e15d3d;
+}
+
+body {
+  font-family: 'Space Grotesk', 'DM Sans', sans-serif;
+}
+
+.brand {
+  gap: 11px;
+  font-family: 'Space Grotesk', 'DM Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.055em;
+  color: var(--ink);
+}
+
+.brand-mark {
+  position: relative;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  color: var(--brand-orange);
+  transform: rotate(-7deg);
+}
+
+.brand-mark::before,
+.brand-mark::after,
+.brand-mark i,
+.brand-mark b {
+  content: '';
+  position: absolute;
+  display: block;
+  background: currentColor;
+  border-radius: 99px;
+}
+
+.brand-mark::before,
+.brand-mark::after {
+  left: 10px;
+  top: 0;
+  width: 2px;
+  height: 22px;
+}
+
+.brand-mark::after {
+  transform: rotate(90deg);
+}
+
+.brand-mark i,
+.brand-mark b {
+  left: 10px;
+  top: 2px;
+  width: 2px;
+  height: 18px;
+}
+
+.brand-mark i { transform: rotate(45deg); }
+.brand-mark b { transform: rotate(-45deg); }
+
+.brand-mark + span {
+  position: relative;
+  top: -1px;
+}
+
+.main-nav a,
+.header-actions button,
+.admin-btn,
+.auth-btn {
+  font-family: 'Space Grotesk', 'DM Sans', sans-serif;
+}
+
+.main-nav a {
+  font-size: 13px;
+  letter-spacing: -0.02em;
+}
+
+.intro h1,
+.hero-copy h2,
+.section-head h3,
+.newsletter h3,
+.admin-top h2,
+.article-modal h2,
+.post-page .reading-shell h1,
+.post-not-found h1,
+.profile-card h1,
+.auth-modal h2 {
+  font-family: 'Newsreader', 'Playfair Display', Georgia, serif;
+  font-weight: 500;
+}
+
+.intro h1,
+.hero-copy h2,
+.post-page .reading-shell h1 {
+  letter-spacing: -0.065em;
+}
+
+.intro h1 em,
+.hero-copy h2 em,
+.newsletter h3 em,
+.admin-top h2 em {
+  font-family: 'Newsreader', 'Playfair Display', Georgia, serif;
+  font-style: italic;
+}
+
+.eyebrow,
+.kicker,
+.filter,
+.card-meta,
+.status-pill,
+.admin-tab,
+.publish-submit,
+.draft-submit {
+  letter-spacing: .08em;
+}
+
+footer .brand {
+  font-size: 17px;
+}
+
+body.dark {
+  --brand-ink: #f2f3ec;
+}
+
+/* The full-page Studio is an authoring workspace, not a public journal page. */
+body.studio-page > footer {
+  display: none;
+}
+
+/* Studio is a normal page section; the old fixed overlay is no longer used. */
+.studio-shell {
+  display: none;
+}
+
+body.studio-page .studio-shell {
+  display: block;
+}
+
+/* Give the article header a calmer, more editorial top margin. */
+.post-page .reading-shell {
+  padding-top: 38px;
+}
+
+.post-page .reading-shell .kicker {
+  margin-bottom: 18px;
+}
+
+.post-page .reading-shell .byline {
+  margin-top: 34px;
+}
+
+@media (max-width: 760px) {
+  .brand { font-size: 18px; }
+
+  .post-page .reading-shell {
+    padding-top: 26px;
+  }
+}
+
+/* Keep story actions in one row instead of letting Delete wrap underneath. */
+.admin-row {
+  grid-template-columns: 54px minmax(0, 1fr) 105px 95px auto auto;
+}
+
+.admin-row > div {
+  min-width: 0;
+}
+
+.admin-row .edit-story,
+.admin-row .delete-story {
+  white-space: nowrap;
+}
+
+.admin-row .edit-story {
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  padding: 7px 10px;
+  cursor: pointer;
+  font: 10px 'DM Mono';
+}
+
+.admin-row .edit-story:hover {
+  border-color: var(--ink);
+}
+
+.admin-row .delete-story {
+  margin: 0;
+}
+
+.admin-tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.static-action {
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  padding: 8px 10px;
+  cursor: pointer;
+  font: 10px 'DM Mono';
+}
+
+.static-action:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.static-action:disabled {
+  cursor: wait;
+  opacity: .55;
+}
+
+.static-export-note {
+  margin: -18px 0 18px;
+  color: var(--muted);
+  font: 11px/1.5 'DM Mono';
+}
+
+.cover-upload-button {
+  display: inline-block;
+  margin-top: 9px;
+}
+
+.cover-upload-button input {
+  display: none !important;
+}
+
+.article-copy {
+  border: 1px solid var(--line);
+  background: transparent;
+  border-radius: 99px;
+  color: var(--ink);
+  padding: 8px 12px;
+  margin-left: 8px;
+  cursor: pointer;
+  font: 10px 'DM Mono';
+}
+
+.article-copy:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+@media (max-width: 760px) {
+  .admin-row {
+    grid-template-columns: 45px minmax(0, 1fr) auto auto auto;
+    gap: 9px;
+  }
+
+  .admin-row .views {
+    display: block;
+  }
+}
+
+/* A compact writing canvas: less dead space, more room for the editor. */
+body.studio-page .admin-modal.writing-mode {
+  padding: 24px 3% 48px;
+}
+
+body.studio-page .writing-mode .story-form {
+  max-width: none;
+}
+
+body.studio-page .writing-mode .story-form > label:not(.markdown-label),
+body.studio-page .writing-mode .form-row,
+body.studio-page .writing-mode .seo-panel {
+  width: 100%;
+  max-width: none;
+}
+
+body.studio-page .writing-mode .seo-panel {
+  margin-right: 0;
+}
+
+body.studio-page .writing-mode .form-head {
+  top: 90px;
+  padding: 10px 0 14px;
+}
+
+body.studio-page .writing-mode .form-head h3 {
+  font-family: 'Newsreader', 'Playfair Display', Georgia, serif;
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+}
+
+body.studio-page .writing-mode .markdown-label {
+  grid-template-rows: auto auto auto minmax(430px, 1fr);
+  align-content: stretch;
+}
+
+body.studio-page .writing-mode .markdown-panel-tools,
+body.studio-page .writing-mode .markdown-toolbar,
+body.studio-page .writing-mode .upload-tool {
+  align-self: start;
+}
+
+body.studio-page .writing-mode .markdown-label > label,
+body.studio-page .writing-mode .markdown-preview-wrap {
+  min-height: 0;
+}
+
+@media (max-width: 760px) {
+  body.studio-page .admin-modal.writing-mode {
+    padding: 20px 22px 50px;
+  }
+}

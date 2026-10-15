@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>7 Beginner Mistakes in C Programming and How to Fix Them · Fieldnotes</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet"><link rel="stylesheet" href="../static.css"></head>
+<body><div class="site"><main class="article-wrap"><a class="back" href="../index.html">← Back to Fieldnotes</a>
+<article class="article"><div class="kicker">Culture · 5 min read</div>
+<h1>7 Beginner Mistakes in C Programming and How to Fix Them</h1><p class="byline">By <strong>kaivalya sonar</strong> · </p><img class="hero" src="https://i.pinimg.com/736x/15/63/be/1563bec75f9503fda9661df1ab0d2134.jpg" alt="7 Beginner Mistakes in C Programming and How to Fix Them">
+<p class="dek">Avoid seven common C programming mistakes, from uninitialised variables and unsafe input to array bounds, pointers, memory leaks, and compiler warnings.</p><div class="body"><p><img alt="Code displayed on a computer screen" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&amp;fit=crop&amp;w=1600&amp;q=85" />)</p>
+<h1>7 Beginner Mistakes in C Programming and How to Fix Them</h1>
+<p>C programming can be rewarding, but small mistakes can cause compilation errors, incorrect results, or crashes. Beginners often assume that if a program compiles, it must be correct. That is not true: some problems only appear with particular inputs or during execution.</p>
+<p>The best way to improve is to understand why a mistake happens, learn how to recognise it, and practise a reliable fix.</p>
+<p>Here are seven common C programming mistakes, with examples and safer alternatives.</p>
+<h2>1. Using a variable before initialising it</h2>
+<p>A local variable declared inside a function is not automatically assigned a useful value. Reading an uninitialised local variable can lead to undefined behaviour.</p>
+<h3>Incorrect example</h3>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main(void) {
+    int total;
+
+    total = total + 10;
+    printf(&quot;%d\n&quot;, total);
+
+    return 0;
+}
+</code></pre>
+<p>The program tries to use <code>total</code> before assigning it a defined starting value.</p>
+<h3>Better version</h3>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main(void) {
+    int total = 0;
+
+    total += 10;
+    printf(&quot;%d\n&quot;, total);
+
+    return 0;
+}
+</code></pre>
+<h3>How to avoid this mistake</h3>
+<ul>
+<li>Initialise variables when you declare them if a sensible initial value is known.</li>
+<li>Make sure a variable is assigned on every execution path before it is read.</li>
+<li>Enable compiler warnings.</li>
+<li>Do not assume that a program is correct just because it printed a number on your computer.</li>
+</ul>
+<h2>2. Confusing <code>=</code> with <code>==</code></h2>
+<p>The assignment operator <code>=</code> stores a value. The equality operator <code>==</code> compares two values. Confusing them can change program behaviour.</p>
+<h3>Incorrect example</h3>
+<pre><code class="language-c">if (score = 100) {
+    printf(&quot;Perfect score!\n&quot;);
+}
+</code></pre>
+<p>This assigns <code>100</code> to <code>score</code>; it does not check whether <code>score</code> was already equal to 100. Since the assigned value is nonzero, the condition evaluates as true.</p>
+<h3>Better version</h3>
+<pre><code class="language-c">if (score == 100) {
+    printf(&quot;Perfect score!\n&quot;);
+}
+</code></pre>
+<h3>How to avoid this mistake</h3>
+<p>Read conditions carefully. Ask yourself whether the code is assigning a value or comparing two values.</p>
+<p>Compile with warnings enabled. Some compilers warn about suspicious assignments inside conditions.</p>
+<h2>3. Reading input without checking whether it succeeded</h2>
+<p>Functions such as <code>scanf()</code> report how many input items they successfully read. Ignoring that return value can leave variables unchanged or cause invalid input to be processed as though it were valid.</p>
+<h3>Fragile example</h3>
+<pre><code class="language-c">int age;
+
+scanf(&quot;%d&quot;, &amp;age);
+printf(&quot;Age: %d\n&quot;, age);
+</code></pre>
+<p>If the input is not a valid integer, the conversion may fail.</p>
+<h3>Better version</h3>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main(void) {
+    int age;
+
+    printf(&quot;Enter your age: &quot;);
+
+    if (scanf(&quot;%d&quot;, &amp;age) != 1) {
+        printf(&quot;Invalid input. Please enter a whole number.\n&quot;);
+        return 1;
+    }
+
+    printf(&quot;Age: %d\n&quot;, age);
+
+    return 0;
+}
+</code></pre>
+<p>This example checks whether one integer was read successfully. A real application may also need to reject out-of-range values and handle leftover characters in the input stream.</p>
+<h3>How to avoid this mistake</h3>
+<ul>
+<li>Check the return value of input functions.</li>
+<li>Validate ranges after successful conversion.</li>
+<li>Consider reading a complete line with <code>fgets()</code> and then parsing it for more controlled input handling.</li>
+<li>Test with letters, empty input, and values outside the expected range.</li>
+</ul>
+<h2>4. Accessing an array outside its bounds</h2>
+<p>If an array contains five elements, its valid indices are <code>0</code> through <code>4</code>. Accessing an element beyond those limits is unsafe and can cause undefined behaviour.</p>
+<h3>Incorrect example</h3>
+<pre><code class="language-c">int numbers[5] = {10, 20, 30, 40, 50};
+
+for (int i = 0; i &lt;= 5; i++) {
+    printf(&quot;%d\n&quot;, numbers[i]);
+}
+</code></pre>
+<p>The loop reaches <code>numbers[5]</code>, which is outside the array.</p>
+<h3>Better version</h3>
+<pre><code class="language-c">int numbers[5] = {10, 20, 30, 40, 50};
+
+for (int i = 0; i &lt; 5; i++) {
+    printf(&quot;%d\n&quot;, numbers[i]);
+}
+</code></pre>
+<h3>How to avoid this mistake</h3>
+<ul>
+<li>Remember that C array indices start at zero.</li>
+<li>For an array of length <code>n</code>, valid indices range from <code>0</code> to <code>n - 1</code>.</li>
+<li>Use a length variable consistently instead of repeating unrelated numbers.</li>
+<li>Test the first and last valid elements, and check boundary cases.</li>
+</ul>
+<h2>5. Using pointers incorrectly</h2>
+<p>A pointer stores an address. Dereferencing a pointer is valid only when it points to a suitable, live object. A pointer that has not been initialised or no longer refers to a valid object must not be dereferenced.</p>
+<h3>Incorrect example</h3>
+<pre><code class="language-c">int *ptr;
+
+*ptr = 25;
+</code></pre>
+<p><code>ptr</code> has not been set to point to a valid integer, so writing through it is invalid.</p>
+<h3>Better version</h3>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+
+int main(void) {
+    int value = 0;
+    int *ptr = &amp;value;
+
+    *ptr = 25;
+
+    printf(&quot;%d\n&quot;, value);
+
+    return 0;
+}
+</code></pre>
+<p>Here, <code>ptr</code> points to the existing variable <code>value</code>.</p>
+<h3>How to avoid this mistake</h3>
+<ul>
+<li>Initialise pointers before using them.</li>
+<li>Understand the lifetime of the object a pointer refers to.</li>
+<li>Do not return a pointer to a local variable that ceases to exist when a function returns.</li>
+<li>Check for <code>NULL</code> where an operation may legitimately produce a null pointer.</li>
+<li>Remember that checking for <code>NULL</code> does not make every other pointer safe; the pointer must also refer to a valid object.</li>
+</ul>
+<p>Pointers deserve deliberate practice. Draw the object, its address, and the pointer value to understand what each expression does.</p>
+<h2>6. Allocating memory but forgetting to release it</h2>
+<p>When a program requests dynamic memory with functions such as <code>malloc()</code>, it must manage that memory appropriately. Memory that is no longer needed should be released with <code>free()</code>. Failing to do so can cause a memory leak in a long-running program.</p>
+<h3>Example of dynamic allocation</h3>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main(void) {
+    int *numbers = malloc(5 * sizeof *numbers);
+
+    if (numbers == NULL) {
+        fprintf(stderr, &quot;Memory allocation failed.\n&quot;);
+        return 1;
+    }
+
+    for (int i = 0; i &lt; 5; i++) {
+        numbers[i] = i * 10;
+        printf(&quot;%d\n&quot;, numbers[i]);
+    }
+
+    free(numbers);
+    numbers = NULL;
+
+    return 0;
+}
+</code></pre>
+<p>This example checks whether allocation succeeded and releases the allocated block when it is no longer needed.</p>
+<p>Setting the pointer to <code>NULL</code> afterwards can help avoid accidentally reusing that pointer variable, but it does not automatically fix other copies of the pointer.</p>
+<h3>How to avoid this mistake</h3>
+<ul>
+<li>Check the result of memory allocation.</li>
+<li>Pair successful allocations with appropriate releases.</li>
+<li>Do not use memory after freeing it.</li>
+<li>Do not free the same allocation more than once.</li>
+<li>Keep ownership of dynamically allocated memory clear in your program design.</li>
+</ul>
+<p>Beginners do not need dynamic allocation in every first project. Learn arrays first, then introduce dynamic memory when the problem calls for it.</p>
+<h2>7. Ignoring compiler warnings and testing only one case</h2>
+<p>A program that compiles successfully can still have logic errors, unsafe operations, or incorrect results. Testing only one input is not enough to establish that it works.</p>
+<h3>A better compile command</h3>
+<p>With GCC, begin with:</p>
+<pre><code class="language-bash">gcc -std=c11 -Wall -Wextra -pedantic main.c -o app
+</code></pre>
+<p>These options request useful diagnostics and help you notice suspicious code. They do not detect every possible defect, so testing and code review still matter.</p>
+<h3>Test more than the normal case</h3>
+<p>For a marks calculator, try:</p>
+<ul>
+<li>A valid mark such as <code>75</code>.</li>
+<li>The lower boundary, <code>0</code>.</li>
+<li>The upper boundary, <code>100</code>.</li>
+<li>An invalid value such as <code>120</code>.</li>
+<li>Non-numeric input.</li>
+<li>An unexpected menu choice.</li>
+</ul>
+<p>For each test, write down the expected output and compare it with the actual result. If something fails, reproduce the smallest example that demonstrates the issue.</p>
+<h3>How to avoid this mistake</h3>
+<ul>
+<li>Treat warnings as information to investigate, not noise to ignore.</li>
+<li>Test normal inputs, boundary cases, and invalid inputs.</li>
+<li>Rerun relevant tests after fixing a bug.</li>
+<li>Use a debugger when print statements are not enough.</li>
+<li>Read the compiler's first relevant error carefully; later errors can be consequences of an earlier problem.</li>
+</ul>
+<h2>A quick checklist before submitting a C program</h2>
+<p>Use this checklist before submitting coursework or publishing a beginner project:</p>
+<ul>
+<li>[ ] Are variables initialised before they are read?</li>
+<li>[ ] Are conditions using <code>==</code> when comparison is intended?</li>
+<li>[ ] Are input results checked and values validated?</li>
+<li>[ ] Are array indices within valid bounds?</li>
+<li>[ ] Are pointers initialised and used only when valid?</li>
+<li>[ ] Is dynamically allocated memory released appropriately?</li>
+<li>[ ] Have compiler warnings been reviewed?</li>
+<li>[ ] Have normal, boundary, and invalid inputs been tested?</li>
+<li>[ ] Can you explain the purpose of each function?</li>
+</ul>
+<h2>Frequently asked questions</h2>
+<h3>Why does my C program compile but produce the wrong output?</h3>
+<p>Compilation checks whether the code can be translated according to the compiler's rules; it does not prove that your logic matches the intended result.</p>
+<p>Check the input, conditions, loop boundaries, variable values, and assumptions. Then reduce the problem to a small reproducible example.</p>
+<h3>Are compiler warnings errors?</h3>
+<p>Not necessarily. Warnings highlight code that may be suspicious or risky. Some projects choose to treat warnings as errors, but regardless of that setting, understand and resolve warnings rather than blindly ignoring them.</p>
+<h3>What is the most important C programming habit for beginners?</h3>
+<p>Write small programs, compile with warnings enabled, test more than one input, and explain why the code works. This habit helps you catch mistakes earlier and build a stronger understanding of the language.</p>
+<h3>Do I need to learn pointers immediately?</h3>
+<p>You can start with variables, conditions, loops, and functions, but pointers are a central part of C and should be learned carefully. Build up through small, controlled examples before using them in complex code.</p>
+<h2>Conclusion: Fix the cause, not just the symptom</h2>
+<p>Many beginner C programming errors come from unclear assumptions about variables, input, array boundaries, pointers, memory, or testing.</p>
+<p>The solution is not to memorise a list of rules and hope for the best. It is to write smaller programs, use compiler diagnostics, test edge cases, and understand how each fix changes the program.</p>
+<p><strong>Your next step:</strong> Choose one mistake from this guide, create a tiny example that reproduces it, fix it, and explain the reason for the fix in your own words.</p>
+<p><strong>Keep learning:</strong> Explore our beginner project guide to practise these skills in a working program.</p>
+<h3>Suggested internal links</h3>
+<p>Add these links when the corresponding articles are published:</p>
+<ul>
+<li>Learn C Programming by Building a Small Project: A Beginner's Guide</li>
+<li>Which C Programming Skills Matter Most for Beginners in 2026?</li>
+<li>Free Resources to Practise C Programming with Real Examples</li>
+</ul>
+<h3>References</h3>
+<ul>
+<li><a href="https://en.cppreference.com/w/c/language">cppreference — C language</a></li>
+<li><a href="https://en.cppreference.com/c">cppreference — C reference</a></li>
+<li><a href="https://www.gnu.org/software/c-intro-and-ref/">GNU C introduction and reference</a></li>
+<li><a href="https://gcc.gnu.org/onlinedocs/">GCC documentation</a></li>
+<li><a href="https://learn.microsoft.com/en-us/cpp/c-language">Microsoft Learn — C language documentation</a></li>
+</ul>
+<hr />
+<p><strong>SEO data note:</strong> The source spreadsheet marks search volume and keyword difficulty as not independently verified. Validate search demand and competition before using them for publishing decisions.</p>
+<p><img alt="photo-1555066931-4365d14bab8c" src="/api/images/6ad0f13edee809ddf681b4f0" />)</p></div></article></main></div></body></html>

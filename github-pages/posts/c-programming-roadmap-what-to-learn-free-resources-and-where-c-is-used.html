@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>C Programming Roadmap: What to Learn, Free Resources and Where C Is Used · Fieldnotes</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet"><link rel="stylesheet" href="../static.css"></head>
+<body><div class="site"><main class="article-wrap"><a class="back" href="../index.html">← Back to Fieldnotes</a>
+<article class="article"><div class="kicker">Culture · 5 min read</div>
+<h1>C Programming Roadmap: What to Learn, Free Resources and Where C Is Used</h1><p class="byline">By <strong>kaivalya sonar</strong> · Oct 15, 2026 · 1:24 AM</p><img class="hero" src="https://i.pinimg.com/736x/c1/42/e3/c142e3b1211230e3a6a4602b0fee8aa0.jpg" alt="C Programming Roadmap: What to Learn, Free Resources and Where C Is Used">
+<p class="dek">Oct 15, 2026 · @Kaivalya
+Most beginners don&#x27;t stall on C programming because it is hard. They stall because nobody hands them a map.</p><div class="body"><h2>Prologue: Fifteen tabs</h2>
+<p>&#91;image: A browser tab bar crowded with C tutorials, book lists and an error message]</p>
+<p>It is a Tuesday night and you have decided to learn C. Twenty minutes later you have fifteen tabs open: three tutorials, two "best book" lists, a debate about C versus C++, and an error message you do not understand yet. You have written exactly zero lines of code.</p>
+<p>This happens to almost everyone, and it is not a discipline problem. It is a map problem. Nobody tells you what order to learn things in, which free resources deserve your time, or why any of it still matters.</p>
+<p>So this post is the map. In four chapters you get the five stops to pass before your first project, six resources worth keeping (one for each job), a look at where C quietly runs the real world, and a 30-day plan to tie it all together. Close the extra tabs. You will not need them.</p>
+<h2>Chapter 1: Five stops before your first project</h2>
+<p>&#91;image: A path with five numbered stops, from setting up to starting a project]</p>
+<p>The urge is to start building at once. Hold off for a few days. A short walk through five stops saves you weeks of confusion later.</p>
+<p><strong>Stop 1: Set up your workshop.</strong> Install a compiler (<code>gcc</code> or <code>clang</code>) and any plain code editor. Type the smallest possible program, compile it, run it. This stop is boring on purpose. On Windows, the easiest route to a Linux-style setup is WSL.</p>
+<p><strong>Stop 2: Learn the basics.</strong> Variables, if-statements, loops and functions. If you have written any Python or JavaScript, this stop is quick. C looks stricter, not stranger. Write ten tiny programs: a temperature converter, a times table, a number guesser.</p>
+<p><strong>Stop 3: Think in memory.</strong> Arrays, strings and pointers. Picture memory as a street of numbered mailboxes, and a pointer as a note that holds one mailbox's address. You do not need to master pointers yet. You need to be able to draw them on paper.</p>
+<p><strong>Stop 4: Read small programs.</strong> Before writing your own, read other people's 30-line programs and predict what they print. Then run them to check. It is the cheapest way to build intuition, and it makes your own bugs easier to spot.</p>
+<p><strong>Stop 5: Start your project.</strong> You are ready when you can say yes to these:</p>
+<ul>
+<li>I can compile with warnings switched on and understand most of them.</li>
+<li>I can write a function that takes an array and changes it.</li>
+<li>I can explain why a 5-letter word needs 6 boxes.</li>
+<li>I can describe a pointer in one sentence.</li>
+</ul>
+<p>You do not need to be perfect. You need to be ready enough that a bug feels like a puzzle instead of a wall. When you get there, the contact book in our first guide, <em>Learn C Programming by Building a Project</em>, is built for exactly this moment.</p>
+<h2>Chapter 2: Six resources, one shelf each</h2>
+<p>Back to those fifteen tabs. Here is what survives the cut. Each resource below does a different job, so you never need two for the same job.</p>
+<p>&#91;image: Five shelves labelled read, learn, practise, build and peek, each holding one recommended resource]</p>
+<table>
+<thead>
+<tr>
+<th>Job</th>
+<th>Resource</th>
+<th>What you get</th>
+<th>Good to know</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Read</td>
+<td><a href="https://beej.us/guide/bgc/">Beej's Guide to C</a></td>
+<td>A tutorial written for people who already know another language, readable online</td>
+<td>A separate second volume covers the standard library</td>
+</tr>
+<tr>
+<td>Learn</td>
+<td><a href="https://cs50.harvard.edu/x/">CS50x</a></td>
+<td>Harvard's intro course, which starts with C before moving to Python, SQL and web topics</td>
+<td>Free to take through OpenCourseWare. Submitting work needs an edX account, and certificates are paid options</td>
+</tr>
+<tr>
+<td>Practise</td>
+<td><a href="https://www.learn-c.org/">Learn-C.org</a></td>
+<td>Short interactive chapters with a built-in editor, nothing to install</td>
+<td>Free. Code runs through an online execution service</td>
+</tr>
+<tr>
+<td>Practise</td>
+<td><a href="https://exercism.org/tracks/c">Exercism, C track</a></td>
+<td>84 exercises (at the time of writing) with automatic analysis and volunteer mentoring</td>
+<td>The track page describes it as 100% free</td>
+</tr>
+<tr>
+<td>Build</td>
+<td><a href="https://viewsourcecode.org/snaptoken/kilo/">Build Your Own Text Editor</a></td>
+<td>184 small steps to a text editor of about 1,000 lines of C in one file</td>
+<td>Needs a Linux-style terminal. Windows users need a Linux environment</td>
+</tr>
+<tr>
+<td>Peek</td>
+<td><a href="https://godbolt.org/">Compiler Explorer</a></td>
+<td>Type C and watch how a compiler turns it into low-level instructions</td>
+<td>Runs in the browser. Its source is on GitHub under the BSD-2-Clause licence</td>
+</tr>
+</tbody>
+</table>
+<p><strong>How to use the shelves.</strong> Pick one resource from Read or Learn, not both. Add one from Practise. Once you reach Stop 5 from Chapter 1, take the Build shelf. Open Compiler Explorer whenever you get curious about what your code turns into.</p>
+<p>The rule that keeps beginners moving: one from each shelf, then stop collecting. A bookmark folder is not progress. A program that compiles is.</p>
+<h2>Chapter 3: Where C is hiding in plain sight</h2>
+<p>Now the reason this is worth your evenings. C is rarely the language of the screen you look at. It is the language of the floor underneath it.</p>
+<p>&#91;image: A stack of layers from a Python program down to hardware, with the interpreter and kernel written in C, and SQLite and Lua as side examples]</p>
+<p>Four places you can check for yourself:</p>
+<ul>
+<li><strong>The Linux kernel.</strong> The kernel's own documentation says it plainly: "The Linux kernel is written in the C programming language." Newer languages are joining it, since the kernel now has support for Rust, but C is still the base.</li>
+<li><strong>SQLite.</strong> Its homepage calls it "a C-language library" and says it is built into all mobile phones and most computers. If an app on your phone stores data locally, there is a good chance C is involved.</li>
+<li><strong>Python's interpreter.</strong> Python's official docs describe a C API for talking to the interpreter, and a coding standard (PEP 7) for any C code that goes into CPython. When you run a Python script, C code is doing a lot of the work underneath.</li>
+<li><strong>Lua.</strong> This small scripting language is about 32,000 lines of C, according to its own site, and the site lists World of Warcraft and Angry Birds among its uses.</li>
+</ul>
+<p>See the pattern? The tools you rely on every day, a database, an interpreter, an operating system, all stand on C.</p>
+<p>That is what you gain by learning it. If you build websites with Python frameworks, C sits only two floors below your code. You will not write kernels next month. But when a tool misbehaves, you will have a sense of what it is doing underneath, and that is how good developers debug faster than everyone else.</p>
+<h2>Chapter 4: Your first 30 days</h2>
+<p>&#91;image: Four blocks across 30 days: set up and basics, arrays and pointers, practise and read code, build your first project]</p>
+<p>Map in hand, resources chosen, reason clear. Here is how it fits together. Thirty to sixty minutes a day is enough.</p>
+<ul>
+<li>[ ] <strong>Days 1-7: Set up and the basics.</strong> Install your compiler (Stop 1). Work through the first chapters of Learn-C.org, or week 1 of CS50x, which starts with C. Write your ten tiny programs (Stop 2).</li>
+<li>[ ] <strong>Days 8-14: Arrays, strings and pointers.</strong> Read the matching sections of Beej's Guide to C (Stop 3). Draw every pointer on paper before you code it.</li>
+<li>[ ] <strong>Days 15-22: Practise and read real code.</strong> Solve one Exercism C exercise every other day. Read small programs and predict their output (Stop 4). Paste one of your own into Compiler Explorer just to look.</li>
+<li>[ ] <strong>Days 23-30: Build.</strong> Start the contact book from our first guide, or begin the text editor tutorial. Keep a notes file of every crash and what caused it.</li>
+</ul>
+<p>That notes file becomes your most valuable resource. In a month, it will be a personal map of exactly where you get stuck.</p>
+<h2>C programming FAQ</h2>
+<p><strong>If I can only pick one resource, which one?</strong> If you are new to programming, CS50x. If you already know another language, Beej's Guide to C, which is written for exactly that reader.</p>
+<p><strong>Is C still worth learning now that Rust exists?</strong> Yes, for most beginners. Rust support has arrived in the Linux kernel, but the kernel is still written in C, and so are SQLite and Lua. Learning C also makes Rust's rules easier to understand later.</p>
+<p><strong>Do I need to finish everything before starting a project?</strong> No. You need the five stops from Chapter 1, not the whole shelf. Projects teach what tutorials cannot.</p>
+<p><strong>What if I miss a few days?</strong> Pick up where you stopped. The plan is a path, not a deadline.</p>
+<h2>The last line</h2>
+<p>You started this post with fifteen tabs and no code. You can leave it with one plan, six resources, a clear reason to care, and a program waiting to be written. Close the tabs. Open your editor.</p>
+<h2>Sources</h2>
+<p>Pages opened on 2026-10-15 to check the facts and links above.</p>
+<ul>
+<li><a href="https://beej.us/guide/bgc/">Beej's Guide to C</a> and <a href="https://beej.us/guide/">Beej's Guides index</a>. Neither page states a price, so confirm it is free to read before publishing.</li>
+<li><a href="https://cs50.harvard.edu/x/">CS50x</a>: free through OpenCourseWare, starts with C.</li>
+<li><a href="https://www.learn-c.org/">Learn-C.org</a>: free interactive C tutorial.</li>
+<li><a href="https://exercism.org/tracks/c">Exercism C track</a>: 84 exercises, described as 100% free.</li>
+<li><a href="https://viewsourcecode.org/snaptoken/kilo/">Build Your Own Text Editor</a>: 184 steps, about 1,000 lines of C.</li>
+<li><a href="https://github.com/compiler-explorer/compiler-explorer">Compiler Explorer on GitHub</a>: README lists C among supported languages; BSD-2-Clause licence.</li>
+<li><a href="https://docs.kernel.org/process/programming-language.html">Linux kernel docs, programming language</a>: "The Linux kernel is written in the C programming language."</li>
+<li><a href="https://www.sqlite.org/index.html">SQLite homepage</a>: "a C-language library".</li>
+<li><a href="https://docs.python.org/3/c-api/intro.html">Python/C API introduction</a>: C API and PEP 7 standard for C code in CPython.</li>
+<li><a href="https://www.lua.org/about.html">About Lua</a>: around 32,000 lines of C; uses include World of Warcraft and Angry Birds.</li>
+</ul>
+<p><img alt="download" src="/api/images/6acfddc2379459cc8ea5ca5d" />)</p></div></article></main></div></body></html>

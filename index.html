@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Fieldnotes — a calm, editorial home for ideas worth keeping." />
+  <title>Fieldnotes — Stories worth keeping</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=20261015" />
+  <link rel="stylesheet" href="/overrides.css?v=20261015" />
+  <link rel="stylesheet" href="/markdown.css?v=20261015" />
+  <link rel="stylesheet" href="/layout-fixes.css?v=20261015" />
+  <link rel="stylesheet" href="/post-page.css?v=20261015" />
+  <link rel="stylesheet" href="/profile-page.css?v=20261015" />
+  <link rel="stylesheet" href="/brand-refresh.css?v=20261015-2" />
+</head>
+
+<body>
+  <div class="grain"></div>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Fieldnotes home"><span class="brand-mark"
+        aria-hidden="true"><i></i><b></b></span><span>fieldnotes</span></a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a class="active" href="/#latest">Latest</a><a href="/#journal">Journal</a><a href="/#about">About</a>
+    </nav>
+    <div class="header-actions"><button class="icon-btn" id="searchBtn" aria-label="Search">⌕</button><button
+        class="icon-btn" id="themeBtn" aria-label="Toggle theme">◐</button><button class="admin-btn"
+        id="adminBtn">Studio <span>↗</span></button></div>
+  </header>
+
+  <main id="top">
+    <section class="intro reveal">
+      <div>
+        <p class="eyebrow">A collection of thoughts, observations &amp; useful rabbit holes <span>●</span></p>
+        <h1>Stories for the<br><em>in-between.</em></h1>
+      </div>
+      <div class="intro-note">
+        <p>Fieldnotes is an independent journal about the ideas, objects and people shaping how we live now.</p><a
+          href="#about" class="text-link">More about us <span>↗</span></a>
+      </div>
+    </section>
+
+    <section class="hero-story reveal" id="latest"></section>
+
+    <section class="section-head reveal">
+      <div>
+        <p class="eyebrow">The journal</p>
+        <h3>More to explore <span>→</span></h3>
+      </div>
+      <div class="filter-row"><button class="filter active" data-filter="all">All stories</button><button class="filter"
+          data-filter="culture">Culture</button><button class="filter" data-filter="design">Design</button><button
+          class="filter" data-filter="life">Life</button></div>
+    </section>
+
+    <section class="story-grid reveal" id="journal">
+      <div id="publishedStories" class="published-stories"></div>
+    </section>
+
+    <section class="newsletter reveal" id="about">
+      <div>
+        <p class="eyebrow">The Sunday letter</p>
+        <h3>Good things,<br><em>occasionally.</em></h3>
+      </div>
+      <div>
+        <p>A short note with one good idea, one beautiful thing and a little room to think. No noise, ever.</p>
+        <form id="newsletterForm"><input type="email" placeholder="Your email address" required><button>Subscribe
+            <span>↗</span></button></form><small id="newsletterMsg">Join 2,400 curious readers.</small>
+      </div>
+    </section>
+  </main>
+
+  <main id="postPage" class="post-page hidden">
+    <div id="postPageContent"></div>
+  </main>
+
+  <main id="profilePage" class="profile-page hidden">
+    <div id="profilePageContent"></div>
+  </main>
+
+  <footer>
+    <div class="brand"><span class="brand-mark" aria-hidden="true"><i></i><b></b></span><span>fieldnotes</span></div>
+    <p>Made for curious minds, wherever they are.</p>
+    <div><a href="#">Instagram</a><a href="#">RSS</a><a href="#">Contact</a></div>
+  </footer>
+
+  <div class="overlay" id="articleOverlay" aria-hidden="true">
+    <div class="article-modal"><button class="close-btn" data-close>×</button>
+      <div id="articleContent"></div>
+    </div>
+  </div>
+  <div class="studio-shell" id="adminOverlay" aria-hidden="true">
+    <div class="admin-modal"><button class="close-btn" data-close>×</button>
+      <div class="admin-top">
+        <div>
+          <p class="eyebrow">Fieldnotes / Studio</p>
+          <h2>Good morning, <em>Amelia.</em></h2>
+          <p class="studio-subtitle">No login. No friction. Write, preview and publish.</p>
+        </div><span class="status-pill"><i></i> System healthy</span>
+      </div>
+      <div class="admin-stats">
+        <div><strong id="publishedCount">04</strong><span>Published</span></div>
+        <div><strong>02</strong><span>Drafts</span></div>
+        <div><strong>2.4k</strong><span>Readers</span></div><button id="newStoryBtn">+ New story</button>
+      </div>
+      <div class="admin-body">
+        <div class="admin-toolbar">
+          <h3>Your stories</h3>
+          <div class="admin-tools"><button class="admin-tab active">Published</button><button
+              class="admin-tab">Drafts</button><button class="static-action" id="exportStaticBtn" type="button">Export
+              Pages ↗</button><button class="static-action" id="openStaticPreviewBtn" type="button">Local Preview
+              ↗</button><button class="static-action" id="openGithubPagesBtn" type="button">GitHub Pages
+              ↗</button></div>
+        </div>
+        <p class="static-export-note" id="staticExportNote">Export published posts into the separate
+          <code>github-pages</code> folder for GitHub Pages.</p>
+        <div id="adminList"></div>
+      </div>
+      <form id="storyForm" class="story-form hidden">
+        <div class="form-head">
+          <div>
+            <p class="eyebrow">Writing mode</p>
+            <h3>New story</h3>
+          </div><button type="button" id="cancelStory">Back to stories</button>
+        </div><label>Title<input name="title" required
+            placeholder="A title with a little pull..." /></label><label>Overview<textarea name="overview" required
+            placeholder="A short description for the story card..."></textarea></label>
+        <div class="form-row"><label>Category<select name="category">
+              <option>Culture</option>
+              <option>Design</option>
+              <option>Life</option>
+              <option>Mind &amp; culture</option>
+            </select></label><label>Read time<input name="readTime" value="5 min read" /></label></div><label>Cover
+          image URL<input name="image" placeholder="https://images.unsplash.com/..." /></label>
+        <div class="markdown-label"><label>Story in Markdown<textarea name="content" id="markdownInput" required
+              placeholder="# Your story title\n\nWrite your story here...\n\nUse **bold**, *italics*, lists and links."></textarea></label>
+          <div class="markdown-preview-wrap"><span>Live preview</span>
+            <div id="markdownPreview" class="markdown-preview">
+              <p class="preview-empty">Your rendered story will appear here.</p>
+            </div>
+          </div>
+        </div><button class="publish-submit">Publish story <span>↗</span></button>
+      </form>
+    </div>
+  </div>
+  <div class="toast" id="toast"></div>
+  <script src="/app.js?v=20261015-4"></script>
+</body>
+
+</html>

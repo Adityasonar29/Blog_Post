@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Learn C Programming by Building a Project: Skills That Matter and 7 Mistakes to Avoid · Fieldnotes</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet"><link rel="stylesheet" href="../static.css"></head>
+<body><div class="site"><main class="article-wrap"><a class="back" href="../index.html">← Back to Fieldnotes</a>
+<article class="article"><div class="kicker">Mind &amp; culture · 5 min read</div>
+<h1>Learn C Programming by Building a Project: Skills That Matter and 7 Mistakes to Avoid</h1><p class="byline">By <strong>Amelia Moore</strong> · Oct 15, 2026 · 12:51 AM</p><img class="hero" src="https://i.pinimg.com/736x/02/ca/4c/02ca4cac0402b1b6ce9c3fd29453c6b8.jpg" alt="Learn C Programming by Building a Project: Skills That Matter and 7 Mistakes to Avoid">
+<p class="dek">Most beginners don&#x27;t quit C programming because it is hard. They quit because they learn it as a pile of syntax instead of a way of thinking about memory.
+This guide takes a different path. Instead of a pile of syntax, you get a story in six chapters: a crash, a way of seeing memory, a learning order that works, a real project, seven traps that catch almost everyone, and a short road ahead. By the end you will have a working contact book and a clear answer to which C programming skills matter most in 2026.</p><div class="body"><p>Oct 15, 2026 · @Kaivalya</p>
+<h2>Chapter 1: The night your first program crashes</h2>
+<p>&#91;image: A terminal showing Hello World working, then a segmentation fault]</p>
+<p>It is late and your tea has gone cold. You type your first C program, compile it, and the screen says "Hello, World!". For about ten minutes you feel unstoppable.</p>
+<p>Then you write something a little bigger: a small notes program that stores a few names. You run it, and the terminal answers with four words: "Segmentation fault (core dumped)".</p>
+<p>No line number. No friendly explanation. Just a crash.</p>
+<p>Here is the part nobody tells beginners. That message is not C being cruel. It means your program touched a piece of memory it was not allowed to touch, and the computer stopped it before it could do damage. Most other languages quietly guard you from that mistake. C trusts you completely, and that trust is exactly what makes it worth learning.</p>
+<p>This is why C programming is still taught: it makes you meet the machine. The rest of this story is about how to meet it without losing your evenings.</p>
+<h2>Chapter 2: What C is really asking you to understand</h2>
+<p>Think of your computer's memory as a long street of numbered mailboxes. Every variable you create lives in one of those boxes, and every box has an address.</p>
+<p>&#91;image: Eight memory boxes in a row. One holds 42, another holds the address of that box, with an arrow between them]</p>
+<p>In the picture, the box at address 0x1003 holds the number 42. Another box holds <code>0x1003</code> itself, which is the address of the first box. That second variable is called a <strong>pointer</strong>. It does not hold a value. It holds directions to one.</p>
+<p>This single idea is the heart of C. Once it clicks, the crash from Chapter 1 stops being mysterious: a segmentation fault usually means a pointer held directions to a box your program was never given.</p>
+<p>And the payoff reaches far beyond C. You will keep meeting it underneath tools you already use:</p>
+<ul>
+<li><strong>Operating systems.</strong> The Linux kernel is written mainly in C.</li>
+<li><strong>Databases.</strong> SQLite and PostgreSQL are written in C.</li>
+<li><strong>Language runtimes.</strong> CPython, the standard Python interpreter, is written in C.</li>
+<li><strong>Embedded devices.</strong> Microcontrollers in cars, appliances and sensors are commonly programmed in C.</li>
+</ul>
+<p>After C, a Python list or a JavaScript array stops being magic. You know roughly what the machine is doing, so you debug faster and design better.</p>
+<h2>Chapter 3: Learn it in the right order</h2>
+<p>Most people get lost in C because they start in the middle. They meet pointers before they can read an error message, or <code>malloc</code> before they trust a loop. The fix is simple: climb one step at a time.</p>
+<p>&#91;image: Seven steps rising from reading warnings to files and debugging]</p>
+<p>Here is what each step is for, and how you know you have climbed it.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Skill</th>
+<th>Why it matters</th>
+<th>You have it when you can</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Read the compiler's warnings</td>
+<td>Most C bugs are flagged before you even run the code</td>
+<td>Compile with <code>-Wall -Wextra</code> and fix every warning</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Variables and loops</td>
+<td>The base for everything else</td>
+<td>Write a loop that adds up numbers a user types</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Arrays and strings</td>
+<td>A string is just letters in a row, ending in a hidden <code>'\0'</code></td>
+<td>Explain why a 5-letter word needs 6 boxes</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Functions and structs</td>
+<td>Lets you split code up and keep related data together</td>
+<td>Group a name and a phone number into one struct</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Pointers</td>
+<td>The core idea of C, from Chapter 2</td>
+<td>Swap two numbers using a function</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>malloc</code> and <code>free</code></td>
+<td>Lets you ask for memory while the program runs</td>
+<td>Grow a list at runtime and free it exactly once</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Files and debugging</td>
+<td>Makes programs useful and bugs findable</td>
+<td>Save data to a file and trace a crash with a debugger</td>
+</tr>
+</tbody>
+</table>
+<p><strong>What to skip for now:</strong> function pointers, clever preprocessor tricks, bit manipulation and multithreading. They are real skills, but they are easy to pick up later and discouraging to start with.</p>
+<p>The most underrated habit is step 1. Treat every compiler warning as a bug report. Beginners who do this learn faster than those who only read tutorials.</p>
+<h2>Chapter 4: Build something that works</h2>
+<p>Now for the fun part. Tutorials teach words. Projects teach decisions. A contact book is small enough to finish in an evening, and it quietly uses almost every skill from Chapter 3.</p>
+<p>Before any code, picture what we are building. Our program keeps a row of 100 slots. Each slot holds one <strong>struct</strong>, a small bundle that keeps a name and a phone number together so they never get separated.</p>
+<p>&#91;image: A row of contact slots, with one slot opened to show a name field and a phone field]</p>
+<p>Save this as <code>contacts.c</code>:</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+#define MAX_CONTACTS 100
+#define NAME_LEN 50
+#define PHONE_LEN 20
+
+typedef struct {
+    char name[NAME_LEN];
+    char phone[PHONE_LEN];
+} Contact;
+
+/* Reads one line safely. Returns 0 if input has ended. */
+static int read_line(const char *prompt, char *buf, size_t size) {
+    printf(&quot;%s&quot;, prompt);
+    if (fgets(buf, (int)size, stdin) == NULL) {
+        return 0;
+    }
+    buf[strcspn(buf, &quot;\n&quot;)] = '\0';
+    return 1;
+}
+
+int main(void) {
+    Contact book[MAX_CONTACTS];
+    int count = 0;
+    char choice[8];
+
+    for (;;) {
+        if (!read_line(&quot;\n(a)dd, (l)ist, (q)uit: &quot;, choice, sizeof choice)) {
+            break;
+        }
+        if (choice[0] == 'a') {
+            if (count == MAX_CONTACTS) {
+                printf(&quot;Book is full.\n&quot;);
+                continue;
+            }
+            read_line(&quot;Name: &quot;, book[count].name, sizeof book[count].name);
+            read_line(&quot;Phone: &quot;, book[count].phone, sizeof book[count].phone);
+            count++;
+        } else if (choice[0] == 'l') {
+            for (int i = 0; i &lt; count; i++) {
+                printf(&quot;%d. %s - %s\n&quot;, i + 1, book[i].name, book[i].phone);
+            }
+        } else if (choice[0] == 'q') {
+            break;
+        }
+    }
+    return 0;
+}
+</code></pre>
+<p>Compile it with every warning switched on, plus a safety net that stops the program with a clear message if it ever touches memory it should not:</p>
+<pre><code class="language-bash">gcc -Wall -Wextra -g -fsanitize=address,undefined contacts.c -o contacts
+./contacts
+</code></pre>
+<p>That safety net is the answer to Chapter 1. Instead of a mysterious crash, you get a message that names the problem and the line.</p>
+<p><strong>What each part is teaching you</strong></p>
+<ul>
+<li>The <code>struct</code> keeps related data together, the first step toward organizing real programs.</li>
+<li><code>fgets</code> with <code>sizeof</code> reads only as much as the box can hold, so long input cannot spill over.</li>
+<li><code>strcspn</code> removes the newline that <code>fgets</code> leaves behind.</li>
+<li>The small helper function shows how to pull repeated work out of <code>main</code>.</li>
+</ul>
+<p><strong>Then level it up, one step at a time</strong></p>
+<ol>
+<li>Add a search that uses <code>strcmp</code> to find a contact by name.</li>
+<li>Save to a file so contacts survive a restart:</li>
+</ol>
+<pre><code class="language-c">static int save(const Contact *book, int count, const char *path) {
+    FILE *f = fopen(path, &quot;w&quot;);
+    if (f == NULL) {
+        return 0;
+    }
+    for (int i = 0; i &lt; count; i++) {
+        fprintf(f, &quot;%s,%s\n&quot;, book[i].name, book[i].phone);
+    }
+    return fclose(f) == 0;
+}
+</code></pre>
+<ol>
+<li>Replace the fixed row of 100 slots with <code>malloc</code> and <code>realloc</code>, so the book grows as needed, then free it before exit.</li>
+</ol>
+<h2>Chapter 5: The seven traps</h2>
+<p>Once your project grows past a few dozen lines, the traps appear. Nearly every C beginner steps in the same seven, usually in this order. Spot them early and you skip most of the pain.</p>
+<h3>Trap 1: Reading input with no size limit</h3>
+<pre><code class="language-c">char name[10];
+scanf(&quot;%s&quot;, name);        /* spills past the box if the user types 10+ characters */
+</code></pre>
+<p><strong>Fix:</strong> tell the program how much it may read.</p>
+<pre><code class="language-c">fgets(name, sizeof name, stdin);
+/* or */
+scanf(&quot;%9s&quot;, name);       /* leaves room for the hidden '\0' */
+</code></pre>
+<p>Avoid <code>gets</code> entirely. It was removed from the language in C11 because it cannot be used safely.</p>
+<h3>Trap 2: Comparing text with ==</h3>
+<pre><code class="language-c">if (name == &quot;admin&quot;) { ... }          /* compares addresses, not letters */
+</code></pre>
+<p><strong>Fix:</strong> use <code>strcmp</code>.</p>
+<pre><code class="language-c">if (strcmp(name, &quot;admin&quot;) == 0) { ... }
+</code></pre>
+<h3>Trap 3: The loop that goes one box too far</h3>
+<p>This is the classic, and the most likely cause of a mystery crash like the one in Chapter 1.</p>
+<p>&#91;image: An array with five boxes, and a loop that writes into a sixth box that does not belong to it]</p>
+<pre><code class="language-c">int a[5];
+for (int i = 0; i &lt;= 5; i++) { a[i] = 0; }   /* a[5] does not exist */
+</code></pre>
+<p><strong>Fix:</strong> an array of size 5 has boxes numbered 0 to 4, so loop with <code>&lt;</code>.</p>
+<pre><code class="language-c">for (int i = 0; i &lt; 5; i++) { a[i] = 0; }
+</code></pre>
+<h3>Trap 4: Using a variable before giving it a value</h3>
+<pre><code class="language-c">int total;
+total += 5;               /* total started as leftover garbage */
+</code></pre>
+<p><strong>Fix:</strong> always start with a value.</p>
+<pre><code class="language-c">int total = 0;
+</code></pre>
+<h3>Trap 5: Forgetting the hidden end-of-string marker</h3>
+<pre><code class="language-c">char dst[5];
+strcpy(dst, &quot;hello&quot;);     /* needs 6 boxes: 5 letters + the '\0' */
+</code></pre>
+<p><strong>Fix:</strong> make room for the marker, and copy with a limit.</p>
+<pre><code class="language-c">char dst[6];
+snprintf(dst, sizeof dst, &quot;%s&quot;, &quot;hello&quot;);
+</code></pre>
+<h3>Trap 6: Assuming memory or files always work</h3>
+<pre><code class="language-c">int *p = malloc(n * sizeof *p);
+p[0] = 1;                 /* crashes if malloc could not find the memory */
+</code></pre>
+<p><strong>Fix:</strong> check before you use.</p>
+<pre><code class="language-c">int *p = malloc(n * sizeof *p);
+if (p == NULL) {
+    perror(&quot;malloc&quot;);
+    return 1;
+}
+</code></pre>
+<h3>Trap 7: Using memory after giving it back</h3>
+<pre><code class="language-c">free(p);
+p[0] = 1;                 /* the box is no longer yours */
+free(p);                  /* and you cannot return it twice */
+</code></pre>
+<p><strong>Fix:</strong> set the pointer to <code>NULL</code> right after freeing. Freeing <code>NULL</code> is harmless, and using it fails loudly instead of silently corrupting data.</p>
+<pre><code class="language-c">free(p);
+p = NULL;
+</code></pre>
+<p><strong>Your safety net for all seven:</strong> compile with <code>-Wall -Wextra -g -fsanitize=address,undefined</code>. It catches or explains most of these the first time they happen.</p>
+<h2>Chapter 6: The road ahead</h2>
+<p>Remember the crash from Chapter 1? Now you can read it. It was almost certainly a pointer or a loop that reached into a box that was never yours, and you know the seven places to look first.</p>
+<p>Here is a four-week plan to keep the story going:</p>
+<ul>
+<li>[ ] <strong>Week 1:</strong> install <code>gcc</code>, compile "Hello, World", practice variables, loops and functions. Fix every warning.</li>
+<li>[ ] <strong>Week 2:</strong> arrays, strings and <code>struct</code>. Build the contact book from Chapter 4.</li>
+<li>[ ] <strong>Week 3:</strong> pointers. Write your own swap function and a function that fills an array.</li>
+<li>[ ] <strong>Week 4:</strong> <code>malloc</code>, <code>free</code> and files. Add saving and a growing list to your contact book.</li>
+</ul>
+<p>Pace yourself to your schedule. Pointers usually take longer than the other weeks, and that is normal.</p>
+<h2>C programming FAQ</h2>
+<p><strong>Is C too hard for beginners?</strong> C is less forgiving than Python, but it is small. The language has few features, so you can learn all of the basics. The difficulty is memory, which is also what makes C worth learning.</p>
+<p><strong>Should I learn C before Python or JavaScript?</strong> No. You can start anywhere. But if you already know a higher-level language, C explains what that language was doing for you.</p>
+<p><strong>Which compiler should I use?</strong> <code>gcc</code> or <code>clang</code>. On Windows, use WSL or MinGW. On macOS, install the Xcode command line tools.</p>
+<p><strong>What should I build after the contact book?</strong> A to-do list saved to a file, a simple text-based game, or your own version of <code>wc</code> or <code>cat</code>. Pick something you would actually use.</p>
+<h2>The last line</h2>
+<p>The fastest way to learn C programming is to build something small, compile with every warning on, and treat each crash as a clue about how memory works. Start with the contact book tonight. The next time the screen says "Segmentation fault", you will know exactly where to begin.</p></div></article></main></div></body></html>
